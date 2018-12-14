@@ -16,6 +16,7 @@ public class MQConsumer {
 		try {
 			ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("classpath:spring/spring-context.xml");
 			context.start();
+		//	System.in.read();
 		} catch (Exception e) {
 			log.error("==>MQ context start error:", e);
 			System.exit(0);

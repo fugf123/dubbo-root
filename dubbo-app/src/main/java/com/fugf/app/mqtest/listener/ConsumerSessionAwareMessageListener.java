@@ -4,6 +4,7 @@
 package com.fugf.app.mqtest.listener;
 
 import javax.jms.Destination;
+import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.Session;
 
@@ -14,6 +15,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.core.MessageCreator;
 import org.springframework.jms.listener.SessionAwareMessageListener;
 import org.springframework.stereotype.Component;
 
@@ -50,11 +52,11 @@ public class ConsumerSessionAwareMessageListener implements SessionAwareMessageL
 				bailBiz.mailSend(mailParam);
 			} catch (Exception e) {
 				// 发送异常，重新放回队列
-//				activeMqJmsTemplate.send(sessionAwareQueue, new MessageCreator() {
-//					public Message createMessage(Session session) throws JMSException {
-//						return session.createTextMessage(ms);
-//					}
-//				});
+				activeMqJmsTemplate.send(sessionAwareQueue, new MessageCreator() {
+					public Message createMessage(Session session) throws JMSException {
+						return session.createTextMessage(ms);
+					}
+				});
 				log.error("==>MailException:", e);
 			}
 		} catch (Exception e) {

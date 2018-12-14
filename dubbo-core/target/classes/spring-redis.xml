@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:util="http://www.springframework.org/schema/util"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
-        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<!-- redis数据源 -->
 	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
 		<property name="maxIdle" value="${redis.maxIdle}"/>
@@ -21,31 +21,6 @@
 			</list>
 		</constructor-arg>
 	</bean>
-
-	<bean id="jedisCluster" class="redis.clients.jedis.JedisCluster">
-		<constructor-arg index="0">
-			<set>
-				<bean class="redis.clients.jedis.HostAndPort">
-					<constructor-arg index="0" value="0.0.0.0"></constructor-arg>
-					<constructor-arg index="1" value="8761"></constructor-arg>
-				</bean>
-				<bean class="redis.clients.jedis.HostAndPort">
-					<constructor-arg index="0" value="0.0.0.0"></constructor-arg>
-					<constructor-arg index="1" value="8762"></constructor-arg>
-				</bean>
-				<bean class="redis.clients.jedis.HostAndPort">
-					<constructor-arg index="0" value="0.0.0.0"></constructor-arg>
-					<constructor-arg index="1" value="8763"></constructor-arg>
-				</bean>
-				<bean class="redis.clients.jedis.HostAndPort">
-					<constructor-arg index="0" value="0.0.0.0"></constructor-arg>
-					<constructor-arg index="1" value="8764"></constructor-arg>
-				</bean>
-			</set>
-		</constructor-arg>
-	</bean>
-
-
 	<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
 
 	<!-- spring-data-数据工厂 -->

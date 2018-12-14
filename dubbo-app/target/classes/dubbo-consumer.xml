@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo
+       http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    <!--定义了提供方应用信息，用于计算依赖关系；在 dubbo-admin 或 dubbo-monitor 会显示这个名字，方便辨识名称不要与提供方一样-->
+    <dubbo:application name="dubbo-consumer" owner="programmer" organization="dubbox"/>
+    <!--使用 zookeeper 注册中心暴露服务，注意要先开启 zookeeper  -->
+    <!--多注册中心配置，竖号分隔表示同时链接多个不同注册中心，同一注册中心的多个集群地址用逗号隔开-->
+    <!--<dubbo:registry protocol="zookeeper" address="localhost:2181"/>-->
+    <dubbo:consumer check="false" timeout="5000"></dubbo:consumer>
+    <dubbo:registry address="zookeeper://localhost:2181"/>
+    <!--url指定服务不从注册中心中查找服务-->
+    <dubbo:reference id="userService" interface="com.fugf.api.UserService" check="false" url="dubbo://localhost:20818"/>
+</beans>
